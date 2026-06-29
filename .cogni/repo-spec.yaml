@@ -9,15 +9,30 @@
 
 schema_version: "0.1.4"
 
-node_id: "b927a9dd-6132-4fc9-a51e-e3cee2568e3c"
-scope_id: "b44d4394-3147-5787-acab-51546be6a3da"
+node_id: "b6640e17-f24f-42cf-adcb-4b861708c07d"
+scope_id: "c57fccda-3e41-5906-8895-7b96f1fc13bf"
 scope_key: "default"
 
 intent:
-  name: node-template
+  name: boop
+  mission: "Define boop's one-line mission here — refine in .cogni/repo-spec.yaml (surfaced at session start)."
 
-cogni_dao:
-  chain_id: "8453" # Base mainnet
+governance:
+  dao_contract: "0xf2845efd80d580d357604bf4c917e99e47d06207"
+  plugin_contract: "0x33b2f5c1cd644454207e102c657ea0ac2b4d6260"
+  signal_contract: "0x5a4698790b31ee17afe158f63c8ef317d7c56805"
+  token_contract: "0x5a82e8fe817eB1E2F9f96b863c10aae454433455"
+  chain_id: "8453"
+  base_url: "https://proposal.cognidao.org"
+
+knowledge:
+  database: "knowledge_boop"
+  remote:
+    provider: dolthub
+    owner: "cogni-test-nodes"
+    repo: "knowledge-boop"
+    url: "https://doltremoteapi.dolthub.com/cogni-test-nodes/knowledge-boop"
+    custody: cogni-owned
 
 # Activity ledger ingestion + approver allowlist.
 # `approvers` gates the `(admin)/` route group and write routes under
@@ -30,9 +45,13 @@ activity_ledger:
   activity_sources:
     github:
       attribution_pipeline: cogni-v0.0
-      source_refs: ["Cogni-DAO/standalone-node"]
+      source_refs: ["cogni-test-org/boop"]
 
 payments:
+  status: pending_activation
+
+# Token distributions — activate after verifying DAO-controlled minted inventory.
+distributions:
   status: pending_activation
 
 # Born-reviewable default gates. When this node is minted as a single-node fork
